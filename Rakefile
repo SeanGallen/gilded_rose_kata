@@ -1,6 +1,6 @@
+task default: :spec
 
-task :default => :spec
-
+desc 'Run the tests'
 task :spec do
-  sh "rspec ."
+  sh "mrspec --fail-fast"
 end
