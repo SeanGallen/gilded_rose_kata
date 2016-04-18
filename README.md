@@ -38,6 +38,11 @@ $ rake
   branch contains [the solution](https://github.com/CodePlatoon/gilded_rose_kata/blob/josh-final/lib/gilded_rose.rb)
   is the same as the open-closed branch, but the classes are split out into their own files.
 
+# Strategy
+
+Check out [refactoring if statements](refactoring_if_statements.md)
+to simplify this code.
+
 
 # Original Description of the Gilded Rose
 
