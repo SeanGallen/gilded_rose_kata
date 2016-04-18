@@ -3,52 +3,40 @@
 This is a Ruby version of the Gilded Rose Kata, found
 [here](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/).
 
-This is a refactorying kata, so you will be starting with a legacy
-code base.  To work the Kata, clone this git repository and checkout
-the tag 'start-here'. Read the description below for the "rules"
-involving this kata.
+It is modified from [Jim Weirich's version](https://github.com/jimweirich/gilded_rose_kata),
+its purpose is help students practice refactoring and the open-closed principle.
+FWIW, I've seen this in prod code, but multiplied by about 10 (500 lines of this, calling
+other methods that are 500 lines of this).
 
-## Changes from the original
 
-This Ruby version follows the original code very closely, but has the
-following changes:
+## Install and run
 
-* The original had no tests.  Since this is a refactoring kata, I feel
-  the tests are important and provide a fairly complete test suite.
-  Just delete the tests if you wish to "go it alone".
+Install the dependencies:
 
-* The original used a hard coded set of "items", presumably for
-  testing the code.  Since I added a test suite, the hard coded values
-  were not of much use.  I also changed the interface to accept a list of
-  items as a parameter rather than a hard coded constant.
+```
+$ gem install bundler
+$ bundle
+```
 
-You can read
-[the original kata article](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/) for more details.
+Run the tests
 
-## Installation Hints
+```
+$ rake
+```
 
-The easiest way is to use bundler to install the dependencies. To do so, you need to install the bundler gem if you haven't already done so
-
-    gem install bundler
-
-run bundler
-
-    bundle
-
-and should be ready to go. Alternatively, you can install the dependencies one by one using gem install, e.g.
-
-    gem install rspec-given
-
-Have a look at the Gemfile for all dependencies.
 
 ## Git Branches
 
-* The 'master' branch contains the starting point for the kata.  It is
-  also tagged as 'start-here'.
-
-* The 'solution1' branch is my first solution for this kata.
-
-Hope you enjoy this.     -- Jim Weirich
+* The ['master'](https://github.com/CodePlatoon/gilded_rose_kata/tree/master) branch contains the starting point for the kata.
+* The ['josh-flattened'](https://github.com/CodePlatoon/gilded_rose_kata/tree/josh-flattened)
+  branch contains [the solution](https://github.com/CodePlatoon/gilded_rose_kata/blob/josh-flattened/lib/gilded_rose.rb)
+  with the if statements flattened and grouped better.
+* The ['josh-with-open-closed-principle'](https://github.com/CodePlatoon/gilded_rose_kata/tree/josh-with-open-closed-principle)
+  branch contains [the solution](https://github.com/CodePlatoon/gilded_rose_kata/blob/josh-with-open-closed-principle/lib/gilded_rose.rb)
+  modified to use polymorphism to observe the Open Closed Principle.
+* The ['josh-final'](https://github.com/CodePlatoon/gilded_rose_kata/tree/josh-final)
+  branch contains [the solution](https://github.com/CodePlatoon/gilded_rose_kata/blob/josh-final/lib/gilded_rose.rb)
+  is the same as the open-closed branch, but the classes are split out into their own files.
 
 
 # Original Description of the Gilded Rose
@@ -63,24 +51,22 @@ named Leeroy, who has moved on to new adventures. Your task is to add
 the new feature to our system so that we can begin selling a new
 category of items. First an introduction to our system:
 
-- All items have a SellIn value which denotes the number of days we
-  have to sell the item
-- All items have a Quality value which denotes how valuable the item
-  is
+- All items have a SellIn value which denotes the number of days we have to sell the item
+- All items have a Quality value which denotes how valuable the item is
 - At the end of each day our system lowers both values for every item
 
 Pretty simple, right? Well this is where it gets interesting:
 
-  - Once the sell by date has passed, Quality degrades twice as fast
-  - The Quality of an item is never negative
-  - "Aged Brie" actually increases in Quality the older it gets
-  - The Quality of an item is never more than 50
-  - "Sulfuras", being a legendary item, never has to be sold or
-    decreases in Quality
-  - "Backstage passes", like aged brie, increases in Quality as it's
-    SellIn value approaches; Quality increases by 2 when there are 10
-    days or less and by 3 when there are 5 days or less but Quality
-    drops to 0 after the concert
+- Once the sell by date has passed, Quality degrades twice as fast
+- The Quality of an item is never negative
+- "Aged Brie" actually increases in Quality the older it gets
+- The Quality of an item is never more than 50
+- "Sulfuras", being a legendary item, never has to be sold or
+  decreases in Quality
+- "Backstage passes", like aged brie, increases in Quality as it's
+  SellIn value approaches; Quality increases by 2 when there are 10
+  days or less and by 3 when there are 5 days or less but Quality
+  drops to 0 after the concert
 
 We have recently signed a supplier of conjured items. This requires an update to our system:
 
