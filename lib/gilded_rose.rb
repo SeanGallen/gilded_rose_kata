@@ -1,48 +1,48 @@
 def update_quality(items)
   items.each do |item|
-    if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
-      if item.quality > 0
-        if item.name != 'Sulfuras, Hand of Ragnaros'
-          item.quality -= 1
-        end
-      end
-    else
-      if item.quality < 50
-        item.quality += 1
-        if item.name == 'Backstage passes to a TAFKAL80ETC concert'
-          if item.sell_in < 11
-            if item.quality < 50
-              item.quality += 1
-            end
-          end
-          if item.sell_in < 6
-            if item.quality < 50
-              item.quality += 1
-            end
-          end
-        end
-      end
-    end
-    if item.name != 'Sulfuras, Hand of Ragnaros'
-      item.sell_in -= 1
-    end
+    update_item item
+  end
+end
+
+def update_item(item)
+  if item.name == 'Aged Brie'
+    item.sell_in -= 1
     if item.sell_in < 0
-      if item.name != "Aged Brie"
-        if item.name != 'Backstage passes to a TAFKAL80ETC concert'
-          if item.quality > 0
-            if item.name != 'Sulfuras, Hand of Ragnaros'
-              item.quality -= 1
-            end
-          end
-        else
-          item.quality = item.quality - item.quality
-        end
-      else
-        if item.quality < 50
-          item.quality += 1
-        end
-      end
+      item.quality += 2
+    else
+      item.quality += 1
     end
+    item.quality = 50 if 50 < item.quality
+    item.quality = 0  if item.quality < 0
+  elsif item.name == 'Backstage passes to a TAFKAL80ETC concert'
+    item.sell_in -= 1
+    item.quality += 1
+    if item.sell_in < 5
+      item.quality += 2
+    elsif item.sell_in < 10
+      item.quality += 1
+    end
+    item.quality = 50 if 50 < item.quality
+    item.quality = 0  if item.sell_in < 0
+  elsif item.name == 'Sulfuras, Hand of Ragnaros'
+  elsif item.name == "NORMAL ITEM"
+    item.sell_in -= 1
+    if item.sell_in < 0
+      item.quality -= 2
+    else
+      item.quality -= 1
+    end
+    item.quality = 0 if item.quality < 0
+  elsif item.name == "Conjured Mana Cake"
+    item.sell_in -= 1
+    if 0 < item.sell_in
+      item.quality -= 2
+    else
+      item.quality -= 4
+    end
+    item.quality = 0 if item.quality < 0
+  else
+    raise item.name
   end
 end
 
@@ -60,4 +60,3 @@ Item = Struct.new(:name, :sell_in, :quality)
 #   Item.new("Backstage passes to a TAFKAL80ETC concert", 15, 20),
 #   Item.new("Conjured Mana Cake", 3, 6),
 # ]
-
