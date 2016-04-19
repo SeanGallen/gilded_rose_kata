@@ -16,15 +16,17 @@ def update_item(item)
     item.quality = 0  if item.quality < 0
   elsif item.name == 'Backstage passes to a TAFKAL80ETC concert'
     item.sell_in -= 1
-    item.quality += 1
     if item.sell_in < 5
-      item.quality += 2
+      item.quality += 3
     elsif item.sell_in < 10
+      item.quality += 2
+    else
       item.quality += 1
     end
     item.quality = 50 if 50 < item.quality
     item.quality = 0  if item.sell_in < 0
   elsif item.name == 'Sulfuras, Hand of Ragnaros'
+    # noop
   elsif item.name == "NORMAL ITEM"
     item.sell_in -= 1
     if item.sell_in < 0
